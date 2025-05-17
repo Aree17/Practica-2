@@ -212,12 +212,12 @@ public class LinkedList<E> {
     }
 
     public boolean contains(E value) {
-        Node<E> current = head;
-        while (current != null) {
-            if (current.getData().equals(value)) {
+        Node<E> aux = head;
+        while (aux != null) {
+            if (aux.getData().equals(value)) {
                 return true;
             }
-            current = current.getNext();
+            aux = aux.getNext();
         }
         return false;
     }
