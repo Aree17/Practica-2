@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nombre": "Lithium",
+    "id_genero": 1,
+    "duracion": 4,
+    "url": "https://www.youtube.com/watch?v\u003dpkcJEvMcnEg",
+    "tipo": "VIRTUAL",
+    "id_album": 1
+  },
+  {
+    "id": 2,
+    "nombre": "Come as you are",
+    "id_genero": 1,
+    "duracion": 3,
+    "url": "https://www.youtube.com/watch?v\u003dvabnZ9-ex7o",
+    "tipo": "FISICO",
+    "id_album": 1
+  },
+  {
+    "id": 3,
+    "nombre": "Ten more days",
+    "id_genero": 3,
+    "duracion": 4,
+    "url": "https://www.youtube.com/watch?v\u003d21hoWeMro6Y",
+    "tipo": "VIRTUAL",
+    "id_album": 3
+  },
+  {
+    "id": 4,
+    "nombre": "Quisiera",
+    "id_genero": 2,
+    "duracion": 3,
+    "url": "https://www.youtube.com/watch?v\u003dGtOngOaClgU",
+    "tipo": "VIRTUAL",
+    "id_album": 2
+  },
+  {
+    "id": 5,
+    "nombre": "Para enamorarte",
+    "id_genero": 2,
+    "duracion": 5,
+    "url": "https://www.youtube.com/watch?v\u003dGb_5t0Uqsls",
+    "tipo": "VIRTUAL",
+    "id_album": 2
+  }
+]
