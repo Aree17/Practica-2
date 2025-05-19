@@ -15,7 +15,7 @@ public class Practica {
     private int contadorRepetidos;
     private int contador;
 
-    public void cargarArchivo(String archivo){
+    public void buscarTamaño(String archivo){
         try {
             BufferedReader linecount = new BufferedReader(new FileReader(archivo));
             int totalNumeros = 0;
@@ -36,7 +36,7 @@ public class Practica {
         try {
             this.contador = 0;
             this.contadorRepetidos = 0;
-            cargarArchivo(archivo);
+            buscarTamaño(archivo);
             BufferedReader lector = new BufferedReader(new FileReader(archivo));
             String linea;
             int i = 0, m = 0;
@@ -100,7 +100,6 @@ public class Practica {
 
     public void contador_Lista(String archivo){
         try {
-            cargarArchivo(archivo);
             BufferedReader lector = new BufferedReader(new FileReader(archivo));
             String linea;
             while ((linea = lector.readLine()) != null) {

@@ -27,7 +27,6 @@ public class DaoGenero extends AdapterDao<Genero> {
             this.persist(obj);
             return true;
         } catch (Exception e) {
-            //TODO
             return false;
         }
     }
@@ -37,9 +36,7 @@ public class DaoGenero extends AdapterDao<Genero> {
             this.update(obj, pos);
             return true;
         } catch (Exception e) {
-            //TODO
             return false;
-            // TODO: handle exception
         }
     }
 

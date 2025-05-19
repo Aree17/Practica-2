@@ -39,7 +39,6 @@ public class DaoCancion extends AdapterDao<Cancion> {
         }catch(Exception e){
             e.printStackTrace(); 
             System.out.println(e);
-            //LOG DE ERROR
             return false;
         }
     }

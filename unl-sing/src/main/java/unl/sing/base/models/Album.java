@@ -5,7 +5,6 @@ public class Album {
     private Integer id;
     private String nombre;
     private Date fecha;
-    private Integer id_banda;
 
     public Integer getId() {
         return this.id;
@@ -29,14 +28,6 @@ public class Album {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public Integer getId_banda() {
-        return this.id_banda;
-    }
-
-    public void setId_banda(Integer id_banda) {
-        this.id_banda = id_banda;
     }
 
 }

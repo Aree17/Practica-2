@@ -10,7 +10,6 @@ public class DaoAlbum extends AdapterDao<Album> {
 
     public DaoAlbum() {
         super(Album.class);
-        // TODO Auto-generated constructor stub
     }
 
     public Album getObj() {
@@ -38,9 +37,7 @@ public class DaoAlbum extends AdapterDao<Album> {
             this.update(obj, pos);
             return true;
         } catch (Exception e) {
-            //TODO
             return false;
-            // TODO: handle exception
         }
     }
 

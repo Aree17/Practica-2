@@ -36,7 +36,6 @@ public class AdapterDao <T> implements InterfaceDao<T>{
         if(!file.exists()){
             file.createNewFile();
         }
-        //if(!file.exists()){
             FileWriter fw= new FileWriter(file);
             fw.write(data);
             fw.flush();
@@ -45,8 +44,6 @@ public class AdapterDao <T> implements InterfaceDao<T>{
     }
     @Override
     public LinkedList<T> listAll() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'listAll'");
         LinkedList<T> lista = new LinkedList<>();
         try{
             String data = readFile();
@@ -60,8 +57,6 @@ public class AdapterDao <T> implements InterfaceDao<T>{
 
     @Override
     public void persist(T obj) throws Exception {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'persist'");
         LinkedList<T> list=listAll();
         list.add(obj);
         saveFile(g.toJson(list.toArray()));
@@ -69,8 +64,6 @@ public class AdapterDao <T> implements InterfaceDao<T>{
 
     @Override
     public void update(T obj, Integer pos) throws Exception {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'update'");
         LinkedList<T> list=listAll();
         list.update(obj, pos);
         saveFile(g.toJson(list.toArray()));
@@ -78,8 +71,6 @@ public class AdapterDao <T> implements InterfaceDao<T>{
 
     @Override
     public void update_by_id(T obj, Integer id) throws Exception {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'update_by_id'");
         LinkedList<T> list=listAll();
         list.update(obj, id);
         saveFile(g.toJson(list.toArray()));
