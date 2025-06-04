@@ -1,12 +1,12 @@
 import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
-import { Button, ComboBox, DatePicker, Dialog, Grid, GridColumn, GridItemModel, NumberField, TextField, VerticalLayout } from '@vaadin/react-components';
+import { Button, ComboBox, DatePicker, Dialog, Grid, GridColumn, GridItemModel, GridSortColumn, NumberField, TextField, VerticalLayout } from '@vaadin/react-components';
 import { Notification } from '@vaadin/react-components/Notification';
 import { CancionService} from 'Frontend/generated/endpoints';
 import { useSignal } from '@vaadin/hilla-react-signals';
 import handleError from 'Frontend/views/_ErrorHandler';
 import { Group, ViewToolbar } from 'Frontend/components/ViewToolbar';
 import { useDataProvider } from '@vaadin/hilla-react-crud';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Cancion from 'Frontend/generated/unl/sing/base/models/Cancion';
 
 export const config: ViewConfig = {
@@ -163,9 +163,29 @@ function CancionEntryForm(props: CancionEntryFormProps) {
 //LISTA DE CANCIONES
 export default function CancionView() {
   
-  const dataProvider = useDataProvider<Cancion>({
-    list: () => CancionService.listCancion(),
-  });
+  const [items, setItems] = useState([]);
+  const callData= () => {
+    console.log("HOla call data")
+    CancionService.listAll().then(function(data){
+      setItems(data);
+    });
+  };
+  useEffect(() => {
+    callData();
+  },[]);
+  
+
+  
+
+  const order = (event, columnId) => {
+    console.log(event);
+    const direction = event.detail.value;
+    console.log(`Sort direction changed for column ${columnId} to ${direction}`);
+    var dir = (direction == 'asc') ? 1 : 2;
+    CancionService.order(columnId, dir).then(function(data){
+      setItems(data);
+    });
+  }
 
   function indexIndex({model}:{model:GridItemModel<Cancion>}) {
     return (
@@ -181,16 +201,16 @@ export default function CancionView() {
 
       <ViewToolbar title="Lista de Canciones">
         <Group>
-          <CancionEntryForm onCancionCreated={dataProvider.refresh}/>
+          <CancionEntryForm onCancionCreated={callData} />
         </Group>
       </ViewToolbar>
-      <Grid dataProvider={dataProvider.dataProvider}>
+      <Grid items={items}>
         <GridColumn  renderer={indexIndex} header="Nro" />
-        <GridColumn path="nombre" header="Cancion" />
-        <GridColumn path="album" header="Album"/>
-        <GridColumn path="genero" header="Genero"/>
-        <GridColumn path="duracion" header="Duracion"/>
-        <GridColumn path="tipo" header="Tipo Archivo"/>
+        <GridSortColumn  path="nombre" header="Cancion" onDirectionChanged={(e) => order(e, "nombre")}/>
+        <GridSortColumn path="album" header="Album"  onDirectionChanged={(e) => order(e, "album")} />
+        <GridSortColumn path="genero" header="Genero" onDirectionChanged={(e) => order(e, 'genero')}  />
+        <GridSortColumn path="duracion" header="Duracion"  onDirectionChanged={(e) => order(e, "duracion")}/>
+        <GridSortColumn path="tipo" header="Tipo Archivo"  onDirectionChanged={(e) => order(e, "tipo")}/>
         <GridColumn path="url" header="Link"> 
         </GridColumn>
       </Grid>
