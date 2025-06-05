@@ -70,20 +70,20 @@ public class DaoCancion extends AdapterDao<Cancion> {
         if (!this.listAll().isEmpty()) {
             Cancion[] arreglo = this.listAll().toArray();
             for (int i = 0; i < arreglo.length; i++) {
-                lista.add(toDict(arreglo[i]));
+                lista.add(toDict(arreglo[i], i));
             }
         }
         return lista;
     }
 
-    private HashMap<String, String> toDict(Cancion arreglo) throws Exception{
+    private HashMap<String, String> toDict(Cancion arreglo, Integer i) {
         DaoGenero dg = new DaoGenero();
         DaoAlbum da = new DaoAlbum();
         HashMap<String, String> aux = new HashMap<>();
-        aux.put("id", arreglo.getId().toString());
+        aux.put("id", arreglo.getId().toString(i));
         aux.put("nombre", arreglo.getNombre());
-        aux.put("genero", dg.get(arreglo.getId_genero()).getNombre());
-        aux.put("album", da.get(arreglo.getId_album()).getNombre());
+        aux.put("genero", dg.listAll().get(arreglo.getId_genero() - 1).getNombre());
+        aux.put("album", da.listAll().get(arreglo.getId_album() - 1).getNombre());
         aux.put("duracion", arreglo.getDuracion().toString());
         aux.put("url", arreglo.getUrl());
         aux.put("tipo", arreglo.getTipo().toString());
@@ -129,7 +129,7 @@ public class DaoCancion extends AdapterDao<Cancion> {
     public LinkedList<HashMap<String, String>> orderQ(Integer type, String attribute)throws Exception{
         LinkedList<HashMap<String, String>> lista = all();
         if(!listAll().isEmpty()){
-            HashMap arr[] = lista.toArray();
+            Cancion arr[] = this.listAll().toArray();
             quickSort(arr, 0, arr.length-1, type, attribute);
             lista.toList(arr);
         }
@@ -138,7 +138,7 @@ public class DaoCancion extends AdapterDao<Cancion> {
 
 
 
-    public void quickSort(HashMap arr[], int begin, int end, Integer type, String attribute) {
+    public void quickSort(Cancion arr[], int begin, int end, Integer type, String attribute) {
         if (begin < end) {
             int partitionIndex = partition(arr, begin, end, type, attribute);
     
@@ -147,8 +147,8 @@ public class DaoCancion extends AdapterDao<Cancion> {
         }
     }
 
-    private int partition(HashMap arr[], int begin, int end, Integer type, String attribute) {
-        HashMap pivot = arr[end];
+    private int partition(Cancion arr[], int begin, int end, Integer type, String attribute) {
+        Cancion pivot = arr[end];
         int i = (begin-1);
         if(type==Utiles.ASCENDENTE){
             for (int j = begin; j < end; j++) {
@@ -156,7 +156,7 @@ public class DaoCancion extends AdapterDao<Cancion> {
                 .compareTo(arr[i].get(attribute).toString().toLowerCase()) < 0) {
                     i++;
         
-                    HashMap swapTemp = arr[i];
+                    Cancion swapTemp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = swapTemp;
                 }
@@ -167,14 +167,14 @@ public class DaoCancion extends AdapterDao<Cancion> {
                 .compareTo(arr[i].get(attribute).toString().toLowerCase()) > 0) {
                     i++;
         
-                    HashMap swapTemp = arr[i];
+                    Cancion swapTemp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = swapTemp;
                 }
             }
         }
     
-        HashMap swapTemp = arr[i+1];
+        Cancion swapTemp = arr[i+1];
         arr[i+1] = arr[end];
         arr[end] = swapTemp;
     
