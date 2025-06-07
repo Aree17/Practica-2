@@ -1,5 +1,6 @@
 package unl.sing.base.controller.dao.dao_models;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -80,7 +81,7 @@ public class DaoCancion extends AdapterDao<Cancion> {
         DaoGenero dg = new DaoGenero();
         DaoAlbum da = new DaoAlbum();
         HashMap<String, String> aux = new HashMap<>();
-        aux.put("id", arreglo.getId().toString(i));
+        aux.put("id", arreglo.getId().toString());
         aux.put("nombre", arreglo.getNombre());
         aux.put("genero", dg.listAll().get(arreglo.getId_genero() - 1).getNombre());
         aux.put("album", da.listAll().get(arreglo.getId_album() - 1).getNombre());
@@ -90,46 +91,10 @@ public class DaoCancion extends AdapterDao<Cancion> {
         return aux;
     }
 
-
-
-    /*public LinkedList<HashMap<String, String>> orderByCancion(Integer type, String attribute) throws Exception{
-        LinkedList<HashMap<String, String>> lista = all();
-        if (!lista.isEmpty()) {
-            HashMap arr[] = lista.toArray();
-            int n = arr.length;
-            if (type == Utiles.ASCENDENTE) {
-                for (int i = 0; i < n - 1; i++) {
-                    int min_idx = i;
-                    for (int j = i + 1; j < n; j++)
-                        if (arr[j].get(attribute).toString().toLowerCase()
-                                .compareTo(arr[min_idx].get(attribute).toString().toLowerCase()) < 0) {
-                            min_idx = j;
-                        }
-                    HashMap temp = arr[min_idx];
-                    arr[min_idx] = arr[i];
-                    arr[i] = temp;
-                }
-            } else {
-                for (int i = 0; i < n - 1; i++) {
-                    int min_idx = i;
-                    for (int j = i + 1; j < n; j++) {
-                        if (arr[j].get(attribute).toString().toLowerCase()
-                                .compareTo(arr[min_idx].get(attribute).toString().toLowerCase()) > 0) {
-                            min_idx = j;
-                        }
-                    }
-
-                }
-            }
-        }
-        return lista;
-    }*/
-
-
-    public LinkedList<HashMap<String, String>> orderQ(Integer type, String attribute)throws Exception{
+    public LinkedList<HashMap<String, String>> orderByCancion(Integer type, String attribute)throws Exception{
         LinkedList<HashMap<String, String>> lista = all();
         if(!listAll().isEmpty()){
-            Cancion arr[] = this.listAll().toArray();
+            HashMap arr[] = lista.toArray();
             quickSort(arr, 0, arr.length-1, type, attribute);
             lista.toList(arr);
         }
@@ -138,7 +103,7 @@ public class DaoCancion extends AdapterDao<Cancion> {
 
 
 
-    public void quickSort(Cancion arr[], int begin, int end, Integer type, String attribute) {
+    public void quickSort(HashMap arr[], int begin, int end, Integer type, String attribute) {
         if (begin < end) {
             int partitionIndex = partition(arr, begin, end, type, attribute);
     
@@ -147,8 +112,8 @@ public class DaoCancion extends AdapterDao<Cancion> {
         }
     }
 
-    private int partition(Cancion arr[], int begin, int end, Integer type, String attribute) {
-        Cancion pivot = arr[end];
+    private int partition(HashMap arr[], int begin, int end, Integer type, String attribute) {
+        HashMap pivot = arr[end];
         int i = (begin-1);
         if(type==Utiles.ASCENDENTE){
             for (int j = begin; j < end; j++) {
@@ -156,7 +121,7 @@ public class DaoCancion extends AdapterDao<Cancion> {
                 .compareTo(arr[i].get(attribute).toString().toLowerCase()) < 0) {
                     i++;
         
-                    Cancion swapTemp = arr[i];
+                    HashMap swapTemp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = swapTemp;
                 }
@@ -167,14 +132,14 @@ public class DaoCancion extends AdapterDao<Cancion> {
                 .compareTo(arr[i].get(attribute).toString().toLowerCase()) > 0) {
                     i++;
         
-                    Cancion swapTemp = arr[i];
+                    HashMap swapTemp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = swapTemp;
                 }
             }
         }
     
-        Cancion swapTemp = arr[i+1];
+        HashMap swapTemp = arr[i+1];
         arr[i+1] = arr[end];
         arr[end] = swapTemp;
     

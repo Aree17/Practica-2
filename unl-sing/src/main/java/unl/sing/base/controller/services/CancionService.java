@@ -36,7 +36,7 @@ public class CancionService {
     }
 
     public List<HashMap> order(String attribute, Integer type)throws Exception{
-        return Arrays.asList(db.orderQ(type, attribute).toArray());
+        return Arrays.asList(db.orderByCancion(type, attribute).toArray());
     }
 
 
@@ -108,36 +108,4 @@ public class CancionService {
         }
         return lista;
     }
-
-    /*public List<HashMap> listCancion() {
-        List<HashMap> lista = new ArrayList<>();
-        if (!db.listAll().isEmpty()) {
-            Cancion[] arreglo = db.listAll().toArray();
-
-            for (int i = 0; i < arreglo.length; i++) {
-                HashMap<String, String> aux = new HashMap<>();
-                aux.put("id", arreglo[i].getId().toString(i));
-                aux.put("nombre", arreglo[i].getNombre());
-                aux.put("genero", new DaoGenero().listAll().get(arreglo[i].getId_genero() - 1).getNombre());
-                aux.put("id_genero", new DaoGenero().listAll().get(arreglo[i].getId_genero() - 1).getId().toString());
-                aux.put("album", new DaoAlbum().listAll().get(arreglo[i].getId_album() - 1).getNombre());
-                aux.put("id_album", new DaoAlbum().listAll().get(arreglo[i].getId_album() - 1).getId().toString());
-                aux.put("duracion", arreglo[i].getDuracion().toString());
-                aux.put("url", arreglo[i].getUrl());
-                aux.put("tipo", arreglo[i].getTipo().toString());
-                lista.add(aux);
-            }
-        }
-        return lista;
-    }
-
-    /*public List<Cancion> order(String atributo, Integer type){
-        System.out.println(atributo+""+type);
-        if(atributo.equalsIgnoreCase("nombre"))
-            return (List<Cancion>) Arrays.asList(db.orderByCancion(type).toArray());
-        else if (atributo.equalsIgnoreCase("genero"))
-            return (List<Cancion>) Arrays.asList(db.orderByNombre(type).toArray());
-        else
-            return (List<Cancion>) Arrays.asList(db.listAll().toArray());
-    } */
 }
