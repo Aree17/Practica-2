@@ -3,6 +3,7 @@ package unl.sing.base.controller.dao.dao_models;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.checkerframework.checker.units.qual.t;
 
@@ -205,6 +206,47 @@ public class DaoCancion extends AdapterDao<Cancion> {
 
         return i + 1;
     }
-    
+
+     public LinkedList<HashMap<String, Object>> search(String attribute, String text, Integer type) throws Exception {
+        LinkedList<HashMap<String, Object>> lista = all();
+        LinkedList<HashMap<String, Object>> resp = new LinkedList<>();
+        
+        if (!lista.isEmpty()) {
+            HashMap<String, Object>[] arr = lista.toArray();
+            System.out.println(attribute+" "+text+" ** *** * * ** * * * *");
+            switch (type) {
+                case 1:
+                System.out.println(attribute+" "+text+" UNO");
+                    for (HashMap m : arr) {
+                        if (m.get(attribute).toString().toLowerCase().startsWith(text.toLowerCase())) {
+                            resp.add(m);
+                        }
+                    }
+                    break;
+                case 2:
+                System.out.println(attribute+" "+text+" DOS");
+                    for (HashMap m : arr) {
+                        if (m.get(attribute).toString().toLowerCase().endsWith(text.toLowerCase())) {
+                            resp.add(m);
+                        }
+                    }
+                    break;
+                default:
+                System.out.println(attribute+" "+text+" TRES");
+                    for (HashMap m : arr) {
+                        System.out.println("***** "+m.get(attribute)+"   "+attribute);
+                        if (m.get(attribute).toString().toLowerCase().contains(text.toLowerCase())) {
+                            resp.add(m);
+                        }
+                    }
+                    break;
+            }
+        }
+        return resp;
+    }
+
+    public static void main(String[] args) {
+        DaoCancion dc = new DaoCancion();
+    }
 
 }

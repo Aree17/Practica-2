@@ -1,5 +1,5 @@
 import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
-import { Button, ComboBox, DatePicker, Dialog, Grid, GridColumn, GridItemModel, GridSortColumn, NumberField, TextField, VerticalLayout } from '@vaadin/react-components';
+import { Button, ComboBox, DatePicker, Dialog, Grid, GridColumn, GridItemModel, GridSortColumn, HorizontalLayout, Icon, NumberField, Select, TextField, VerticalLayout } from '@vaadin/react-components';
 import { Notification } from '@vaadin/react-components/Notification';
 import { CancionService} from 'Frontend/generated/endpoints';
 import { useSignal } from '@vaadin/hilla-react-signals';
@@ -159,21 +159,26 @@ function CancionEntryForm(props: CancionEntryFormProps) {
   );
 }
 
+function indexIndex({model}:{model:GridItemModel<Cancion>}) {
+  return (
+    <span>
+      {model.index + 1} 
+    </span>
+  );
+}
+
 
 //LISTA DE CANCIONES
 export default function CancionView() {
   
   const [items, setItems] = useState([]);
-  const callData= () => {
-    console.log("HOla call data")
-    CancionService.listAll().then(function(data){
+  useEffect(() => {
+    CancionService.listAll().then(function (data) {
+      //items.values = data;
       setItems(data);
     });
-  };
-  useEffect(() => {
-    callData();
-  },[]);
-  
+  }, []);
+
 
   
 
@@ -187,13 +192,46 @@ export default function CancionView() {
     });
   }
 
-  function indexIndex({model}:{model:GridItemModel<Cancion>}) {
-    return (
-      <span>
-        {model.index + 1} 
-      </span>
-    );
-  }
+  const criterio = useSignal('');
+  const texto = useSignal('');
+  const itemSelect = [
+    {
+      label: 'Cancion',
+      value: 'nombre',
+    },
+    {
+      label: 'Album',
+      value: 'album',
+    },
+    {
+      label: 'Genero',
+      value: 'genero',
+    },
+    {
+      label: 'Tipo de Archivo',
+      value: 'tipo',
+    },
+  ];
+  const search = async () => {
+    try {
+      console.log(criterio.value+" "+texto.value);
+      CancionService.search(criterio.value, texto.value, 0).then(function (data) {
+        setItems(data);
+      });
+
+      criterio.value = '';
+      texto.value = '';
+
+      Notification.show('Busqueda realizada', { duration: 5000, position: 'bottom-end', theme: 'success' });
+
+
+    } catch (error) {
+      console.log(error);
+      handleError(error);
+    }
+  };
+
+
 
   return (
 
@@ -201,9 +239,30 @@ export default function CancionView() {
 
       <ViewToolbar title="Lista de Canciones">
         <Group>
-          <CancionEntryForm onCancionCreated={callData} />
+          <CancionEntryForm />
         </Group>
       </ViewToolbar>
+      <HorizontalLayout theme="spacing">
+        <Select items={itemSelect}
+          value={criterio.value}
+          onValueChanged={(evt) => (criterio.value = evt.detail.value)}
+          placeholder="Selecione un cirterio">
+
+
+        </Select>
+
+        <TextField
+          placeholder="Search"
+          style={{ width: '50%' }}
+          value={texto.value}
+          onValueChanged={(evt) => (texto.value = evt.detail.value)}
+        >
+          <Icon slot="prefix" icon="vaadin:search" />
+        </TextField>
+        <Button onClick={search} theme="primary">
+          BUSCAR
+        </Button>
+      </HorizontalLayout>
       <Grid items={items}>
         <GridColumn  renderer={indexIndex} header="Nro" />
         <GridSortColumn  path="nombre" header="Cancion" onDirectionChanged={(e) => order(e, "nombre")}/>
