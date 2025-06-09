@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotEmpty;
 import unl.sing.base.controller.dao.dao_models.DaoAlbum;
 import unl.sing.base.controller.dao.dao_models.DaoCancion;
 import unl.sing.base.controller.dao.dao_models.DaoGenero;
+import unl.sing.base.controller.dataStruct.list.LinkedList;
 import unl.sing.base.models.Album;
 import unl.sing.base.models.Cancion;
 import unl.sing.base.models.Genero;
@@ -35,8 +36,22 @@ public class CancionService {
         return Arrays.asList(db.all().toArray());
     }
 
+    public List<Cancion> listAlla() {  
+        // System.out.println("**********Entro aqui");  
+         //System.out.println("lengthy "+Arrays.asList(da.listAll().toArray()).size());    
+         return (List<Cancion>)Arrays.asList(db.listAll().toArray());
+     }
+
     public List<HashMap> order(String attribute, Integer type)throws Exception{
         return Arrays.asList(db.orderByCancion(type, attribute).toArray());
+    }
+
+    public List<HashMap> search(String attribute, String text, Integer type) throws Exception {
+        LinkedList<HashMap<String, Object>> lista = db.search(attribute, text, type);
+        if(!lista.isEmpty())
+            return Arrays.asList(lista.toArray());
+        else
+            return new ArrayList<>();
     }
 
 
