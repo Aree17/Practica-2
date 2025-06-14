@@ -1,5 +1,7 @@
 [
   { "id": 1, "nombre": "Nevermind", "fecha": "May 16, 2025, 7:25:44 PM" },
   { "id": 2, "nombre": "Primera cita", "fecha": "May 17, 2025, 12:13:45 AM" },
-  { "id": 3, "nombre": "Stories", "fecha": "May 17, 2025, 10:09:33 AM" }
+  { "id": 3, "nombre": "Stories", "fecha": "May 17, 2025, 10:09:33 AM" },
+  { "id": 4, "nombre": "Guts", "fecha": "Jun 10, 2025, 7:50:08 AM" },
+  { "id": 5, "nombre": "Lover", "fecha": "Jun 13, 2025, 7:21:21 PM" }
 ]

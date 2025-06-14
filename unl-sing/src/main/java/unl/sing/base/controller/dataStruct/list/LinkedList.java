@@ -221,6 +221,52 @@ public class LinkedList<E> {
         }
         return false;
     }
+
+    public void quickSort(int arr[], int begin, int end) {
+        if (begin < end) {
+            int partitionIndex = partition(arr, begin, end);
+
+            quickSort(arr, begin, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+
+    private int partition(int arr[], int begin, int end) {
+        int pivot = arr[end];
+        int i = (begin - 1);
+
+        for (int j = begin; j < end; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+
+                int swapTemp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = swapTemp;
+            }
+        }
+
+        int swapTemp = arr[i + 1];
+        arr[i + 1] = arr[end];
+        arr[end] = swapTemp;
+
+        return i + 1;
+    }
+
+    public int sort(int arr[]) {
+        int n = arr.length;
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < n; i += 1) {
+                int temp = arr[i];
+                int j;
+                for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                    arr[j] = arr[j - gap];
+                }
+                arr[j] = temp;
+            }
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<>(5);
 

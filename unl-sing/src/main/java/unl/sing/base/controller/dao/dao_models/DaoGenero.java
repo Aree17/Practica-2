@@ -43,7 +43,7 @@ public class DaoGenero extends AdapterDao<Genero> {
     public static void main(String[] args) {
         DaoGenero da = new DaoGenero();
         da.getObj().setId(da.listAll().getLength() + 1);
-        da.getObj().setNombre("Electronica");
+        da.getObj().setNombre("Country");
         if (da.save())
             System.out.println("GUARDADO");
         else
