@@ -36,12 +36,6 @@ public class CancionService {
         return Arrays.asList(db.all().toArray());
     }
 
-    public List<Cancion> listAlla() {  
-        // System.out.println("**********Entro aqui");  
-         //System.out.println("lengthy "+Arrays.asList(da.listAll().toArray()).size());    
-         return (List<Cancion>)Arrays.asList(db.listAll().toArray());
-     }
-
     public List<HashMap> order(String attribute, Integer type)throws Exception{
         return Arrays.asList(db.orderByCancion(type, attribute).toArray());
     }
@@ -123,4 +117,10 @@ public class CancionService {
         }
         return lista;
     }
+
+    public List<Cancion> listAlla() {  
+        // System.out.println("**********Entro aqui");  
+         //System.out.println("lengthy "+Arrays.asList(da.listAll().toArray()).size());    
+         return (List<Cancion>)Arrays.asList(db.listAll().toArray());
+     }
 }

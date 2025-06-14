@@ -23,7 +23,7 @@ private DaoAlbum de;
         de.getObj().setNombre(nombre);
         
         if(!de.save())
-            throw new  Exception("No se pudo guardar los datos de artista");
+            throw new  Exception("No se pudo guardar los datos de album");
     }
 
     

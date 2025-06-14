@@ -172,15 +172,14 @@ function indexIndex({model}:{model:GridItemModel<Cancion>}) {
 export default function CancionView() {
   
   const [items, setItems] = useState([]);
-  useEffect(() => {
-    CancionService.listAll().then(function (data) {
-      //items.values = data;
+  const callData= () => {
+    CancionService.listAll().then(function(data){
       setItems(data);
     });
-  }, []);
-
-
-  
+  };
+  useEffect(() => {
+    callData();
+  },[]);
 
   const order = (event, columnId) => {
     console.log(event);
@@ -239,7 +238,7 @@ export default function CancionView() {
 
       <ViewToolbar title="Lista de Canciones">
         <Group>
-          <CancionEntryForm />
+          <CancionEntryForm onCancionCreated={callData}/>
         </Group>
       </ViewToolbar>
       <HorizontalLayout theme="spacing">

@@ -44,7 +44,7 @@ public class DaoAlbum extends AdapterDao<Album> {
     public static void main(String[] args) {
         DaoAlbum da = new DaoAlbum();
         da.getObj().setId(da.listAll().getLength() + 1);
-        da.getObj().setNombre("Stories");
+        da.getObj().setNombre("Lover");
         da.getObj().setFecha(new Date());
         if (da.save())
             System.out.println("GUARDADO");

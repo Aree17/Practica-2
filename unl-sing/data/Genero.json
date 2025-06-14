@@ -1,5 +1,6 @@
 [
   { "id": 1, "nombre": "Rock" },
   { "id": 2, "nombre": "Pop" },
-  { "id": 3, "nombre": "Electronica" }
+  { "id": 3, "nombre": "Electronica" },
+  { "id": 4, "nombre": "Country" }
 ]
