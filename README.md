@@ -1,5 +1,5 @@
-# Practica-2
-La practica fue desarrollada en el Framework Vaadin y cuenta con dos partes. La primera se enfoca en comparar la implementacion entre arreglos y listas enlazadas y cual tiene el mayor rendimiento en cuestion de tiempo. La segunda parte esta dedicada a la elaboracion del modulo Cancion, permitiendo listar y registrar canciones junto a sus respectivos atributos y relaciones. Para lo cual fue necesario usar DAOs, servicios y modelos.
+# Practica-3
+La practica fue desarrollada en el Framework Vaadin y cuenta con dos partes. La primera se enfoca en comparar el rendimiento de dos metodos de ordenacion, que fueron quick sort y shell sort, demostrando la mayor eficiencia del primero para ordenar arreglos. En la segunda parte se integro un sistema de busqueda por cancion, album, genero y tipo de archivo en las vistas, ademàs de permitir la ordenacion de varios campos de cancion
 
 ## Parte 1
 
